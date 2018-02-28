@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 /**
@@ -103,8 +104,42 @@ public class Colosseum {
      *         <p>
      */
     public static Pokemon buildPokemon() {
-        Pokemon returnPokemon = null;
-        return returnPokemon;
+        System.out.println("Pick a type: Electric, Fire, or Water");
+        String userChoice = myScan.nextLine();
+        while (!(userChoice.toLowerCase().equals("electric") || userChoice.toLowerCase().equals("fire") || userChoice.toLowerCase().equals("water"))) {
+            System.out.println("the pokemon must be one of the given types");
+            userChoice = myScan.nextLine();
+        }
+        Pokemon tempPokemon;
+        if (userChoice.equals("electric")) {
+            tempPokemon = new ElectricPokemon();
+        } else if (userChoice.equals("fire")) {
+            tempPokemon = new FirePokemon();
+        } else {
+            tempPokemon = new WaterPokemon();
+        }
+        System.out.println("Please name your Pokemon: ");
+        tempPokemon.setName(myScan.nextLine());
+        System.out.println("How many hit points will it have? (1-50): ");
+        tempPokemon.setHitPoints(myScan.nextInt());
+        while (tempPokemon.getHitPoints() > MAX_HIT_POINTS) {
+            System.out.println("Sorry. Hit points must be between 1 and 50: ");
+            tempPokemon.setHitPoints(myScan.nextInt());
+        }
+        System.out.println("Split 50 points between attack and defense level");
+        System.out.println("Enter your attack level (1-49): ");
+        tempPokemon.setAttackLevel(myScan.nextInt());
+        while (tempPokemon.getAttackLevel() < 1 || tempPokemon.getAttackLevel() > MAX_HIT_POINTS - 1) {
+            System.out.println("Sorry. The attack level must be between 1 and 49: ");
+            tempPokemon.setAttackLevel(myScan.nextInt());
+        }
+        System.out.println("Enter your defense level (1-3): ");
+        tempPokemon.setDefenseLevel(myScan.nextInt());
+        while (tempPokemon.getDefenseLevel() < 1 || tempPokemon.getDefenseLevel() > 3) {
+            System.out.println("Sorry. The defense level must be between 1 and 49: ");
+            tempPokemon.setDefenseLevel(myScan.nextInt());
+        }
+        return tempPokemon;
     }
 
     /**
@@ -196,10 +231,10 @@ public class Colosseum {
      * You do not need to modify this function.
      */
     public static void printTypeMenu() {
-       System.out.println("Select from the following Pokemon types: ");
-       System.out.println("1 - Electric Pokemon ");
-       System.out.println("2 - Fire Pokemon");
-       System.out.println("3 - Water Pokemon");
+        System.out.println("Select from the following Pokemon types: ");
+        System.out.println("1 - Electric Pokemon ");
+        System.out.println("2 - Fire Pokemon");
+        System.out.println("3 - Water Pokemon");
 
     }
     /**
